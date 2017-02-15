@@ -3,8 +3,8 @@
 
 #include <QWidget>
 #include <QStandardItemModel>
-#include <Delegate.h>
-#include <DPList.h>
+#include "src/Delegate.h"
+#include "src/DPList.h"
 
 namespace Ui {
 class ListEditForm;

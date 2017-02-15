@@ -1,4 +1,4 @@
-#include <DPList.h>
+#include "src/DPList.h"
 #include <QFile>
 #include <stdexcept>
 #include <qxmlstream.h>

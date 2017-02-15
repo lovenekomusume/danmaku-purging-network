@@ -1,4 +1,4 @@
-#include "Delegate.h"
+#include "src/Delegate.h"
 #include <QPushButton>
 #include <QApplication>
 #include <QWindow>

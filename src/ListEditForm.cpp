@@ -1,10 +1,10 @@
 #include <iostream>
-#include "ListEditForm.h"
+#include "src/ListEditForm.h"
 #include "ui_ListEditForm.h"
 #include <QStandardItem>
 #include <QAbstractItemModel>
 #include <QMessageBox>
-#include "Delegate.h"
+#include "src/Delegate.h"
 #include <fstream>
 #include <QApplication>
 #include <QDir>

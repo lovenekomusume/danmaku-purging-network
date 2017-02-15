@@ -2,9 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "ListEditForm.h"
-#include <DPList.h>
-#include <Delegate.h>
+#include "src/ListEditForm.h"
+#include "src/DPList.h"
+#include "src/Delegate.h"
 
 namespace Ui {
 class MainWindow;

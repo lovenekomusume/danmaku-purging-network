@@ -1,9 +1,9 @@
-#include "MainWindow.h"
+#include "src/MainWindow.h"
 #include "ui_MainWindow.h"
-#include <Delegate.h>
+#include "src/Delegate.h"
 #include <QFile>
 #include <QDir>
-#include <DPList.h>
+#include "src/DPList.h"
 #include <QDebug>
 #include <QMessageBox>
 #include <QApplication>
@@ -241,7 +241,7 @@ void MainWindow::on_action_about_this_tool_triggered()
 {
     QString aboutStr = "<p>弹幕净化网络计划-终端工具 v1.0.0-beta(测试版)</p>";
     aboutStr += "<p>该项目旨在让需要的人更好的体验弹幕带来的乐趣，帮助大家屏蔽一些可能会引起不适的字词，或让各位分享自己的屏蔽经验。</p>";
-    aboutStr += "<p>本工具使用 QT 5.7.1 制作。</p><p>作者: 月之庭</p><p>联系作者: lovenekomusume@163.com</p><p>本工具为免费开源软件，请勿用作任何商业用途，谢谢！</p>";
+    aboutStr += "<p>本工具使用 QT 5.7.1 制作。</p><p>作者: 月之庭</p><p>联系作者: lovenekomusume@163.com</p><p>本工具为免费开源软件，请勿用于任何商业用途，谢谢！</p>";
     aboutStr += "<p>License(开源协议): GPLv3</p>";
     aboutStr += "<p><a href='#'>官方主页(暂无)</a></p>";
     aboutStr += "<p><a href='www.1000-7.com'>作者的小站</a></p>";

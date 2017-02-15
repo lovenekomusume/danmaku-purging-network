@@ -24,22 +24,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-SOURCES += main.cpp\
-        MainWindow.cpp \
-    ListEditForm.cpp \
-    DPList.cpp \
-    Delegate.cpp
+SOURCES += src/main.cpp\
+        src/MainWindow.cpp \
+    src/ListEditForm.cpp \
+    src/DPList.cpp \
+    src/Delegate.cpp
 
-HEADERS  += MainWindow.h \
-    ListEditForm.h \
-    DPList.h \
-    Delegate.h
+HEADERS  += src/MainWindow.h \
+    src/ListEditForm.h \
+    src/DPList.h \
+    src/Delegate.h
 
-FORMS    += MainWindow.ui \
-    ListEditForm.ui
+FORMS    += src/MainWindow.ui \
+    src/ListEditForm.ui
 
 RESOURCES += \
-    resource.qrc
+    src/resource.qrc
 
 DISTFILES += \
-    style.qss
+    src/style.qss
