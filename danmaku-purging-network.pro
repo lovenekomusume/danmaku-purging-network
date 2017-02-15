@@ -43,3 +43,5 @@ RESOURCES += \
 
 DISTFILES += \
     src/style.qss
+
+RC_FILE = src/icon.rc
