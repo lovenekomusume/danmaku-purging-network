@@ -9,6 +9,7 @@
 #include <QApplication>
 #include <QtXml/QDomDocument>
 #include <QProcess>
+#include "src/REList.h"
 
 
 MainWindow* MainWindow::s_this;
@@ -58,8 +59,12 @@ void MainWindow::on_listCreateButton_clicked()
 
 void MainWindow::loadList()
 {
-    lists.clear();
     ui->introBrowser->setText("正在加载可用列表，请稍候...");
+
+    lists.clear();
+    ButtonDelegate *delegate = (ButtonDelegate*)ui->listsTable->itemDelegateForColumn(0);
+    delegate->statusMap->clear();
+
     QString rootPath = QApplication::applicationDirPath();
     QDir dir(rootPath + "/mylists");
     QFileInfoList fileList = dir.entryInfoList();
@@ -105,17 +110,10 @@ void MainWindow::loadList()
     ui->introBrowser->setText("可用列表加载完成！");
 }
 
-QString MainWindow::generateRegex(DPList list)
+REList MainWindow::generateREList(DPList list)
 {
-    int count = list.items.count();
-    QString result = "(" + list.title + "@" + list.author + ")|";
-    for(int i = 0; i < count; i++)
-    {
-        result += "("+ list.items.at(i) +")";
-        if(i + 1 != count)
-            result += "|";
-    }
-    return result;
+    REList rList = REList(list);
+    return rList;
 }
 
 void MainWindow::on_listsTable_clicked(const QModelIndex &index)
@@ -137,7 +135,7 @@ void MainWindow::editList(ButtonDelegate *delegate, QAbstractItemModel *model, c
     listEditForm->show();
 }
 
-void MainWindow::on_exportButton_clicked()
+bool MainWindow::exportXML(QString itemPrefix, QString filename)
 {
     try
     {
@@ -152,21 +150,22 @@ void MainWindow::on_exportButton_clicked()
         {
             if(it.value())
             {
-                QDomElement item = doc.createElement("item");
-                item.setAttribute("enabled", "true");
-                item.appendChild(doc.createTextNode("t=" + generateRegex(lists.at(it.key()))));
-                root.appendChild(item);
+                // 添加条目
+                REList rl = generateREList(lists.at(it.key()));
+                while(!rl.isEnd())
+                {
+                    QDomElement item = doc.createElement("item");
+                    item.setAttribute("enabled", "true");
+                    item.appendChild(doc.createTextNode(itemPrefix + "=" + rl.next()));
+                    root.appendChild(item);
+                }
             }
 
             ++it;
         }
         if(root.childNodes().size() > 0)
         {
-            QString path = QApplication::applicationDirPath() + "/export/";
-            QDir dir = QDir(path);
-            if(!dir.exists())
-                dir.mkdir(path);
-            QString filePath = path + "导出列表" + QDateTime::currentDateTime().toString("yyyyMMddhhmmss") + ".xml";
+            QString filePath = filename + ".xml";
             QFile *file = new QFile(filePath);
             if(!file->open(QIODevice::WriteOnly | QIODevice::Text))
                 throw("导出发生错误！");
@@ -174,15 +173,28 @@ void MainWindow::on_exportButton_clicked()
             out.setCodec("UTF-8");
             doc.save(out, 4, QDomNode::EncodingFromTextStream);
             file->close();
-            QMessageBox::information(this, "提示", "目标导出成功！文件路径为" + file->fileName());
+            return true;
         }
         else
             QMessageBox::warning(this, "提示", "请至少启用一个列表！");
+        return false;
     }
     catch(...)
     {
         QMessageBox::critical(this, "错误", "生成结果时发生错误，请重试！");
+        return false;
     }
+}
+
+void MainWindow::on_exportButton_clicked()
+{
+    QString path = QApplication::applicationDirPath() + "/export/";
+    QDir dir = QDir(path);
+    if(!dir.exists())
+        dir.mkdir(path);
+    QString filename = path + "导出列表" + QDateTime::currentDateTime().toString("yyyyMMddhhmmss");
+    if(exportXML("r", filename + "_for_flash") && exportXML("t", filename + "_for_html5"))
+        QMessageBox::information(this, "提示", "目标导出成功！文件名为" + filename + "_for_xxx.xml");
 }
 
 void MainWindow::on_flushListButton_clicked()
@@ -243,7 +255,7 @@ void MainWindow::on_action_about_this_tool_triggered()
     aboutStr += "<p>弹幕净化网络这个名字启发自御坂网络，该项目旨在让需要的人能够更好地体验B站弹幕带来的乐趣，帮助大家屏蔽一些可能会引起不适的字词，或让各位分享自己的屏蔽经验。</p>";
     aboutStr += "<p>本工具使用 QT 5.7.1 制作。</p><p>作者: 月之庭</p><p>联系作者: lovenekomusume@163.com</p><p>本工具为免费开源软件，请勿用于任何商业用途，谢谢！</p>";
     aboutStr += "<p>License(开源协议): GPLv3</p>";
-    aboutStr += "<p><a href='#'>官方主页(暂无)</a></p>";
+    aboutStr += "<p><a href='www.1000-7.com/danmaku-purging-network/'>官方主页</a></p>";
     aboutStr += "<p><a href='www.1000-7.com'>作者的小站</a></p>";
     QMessageBox::information(this, "关于本工具", aboutStr);
 }

@@ -28,12 +28,14 @@ SOURCES += src/main.cpp\
         src/MainWindow.cpp \
     src/ListEditForm.cpp \
     src/DPList.cpp \
-    src/Delegate.cpp
+    src/Delegate.cpp \
+    src/REList.cpp
 
 HEADERS  += src/MainWindow.h \
     src/ListEditForm.h \
     src/DPList.h \
-    src/Delegate.h
+    src/Delegate.h \
+    src/REList.h
 
 FORMS    += src/MainWindow.ui \
     src/ListEditForm.ui

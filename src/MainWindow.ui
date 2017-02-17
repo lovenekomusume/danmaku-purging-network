@@ -104,14 +104,14 @@
    <widget class="QPushButton" name="flushListButton">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>10</y>
-      <width>191</width>
+      <width>221</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>刷新可用列表(导入/新建后使用)</string>
+     <string>刷新可用列表(导入/编辑/新建后使用)</string>
     </property>
    </widget>
    <widget class="QPushButton" name="openListDirButton">

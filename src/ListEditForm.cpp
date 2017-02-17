@@ -221,7 +221,7 @@ void ListEditForm::on_importButton_clicked()
             if(reader->name() == "item")
             {
                 kw = reader->readElementText();
-                if(mode == 1 || (mode == 0 && kw.at(0) == 't'))
+                if(mode == 1 || (mode == 0 && (kw.at(0) == 't' || kw.at(0) == 'r')))
                     if(addKeywordItem(kw.mid(2 - mode * 2), false, true))
                         ++itemCount;
             }

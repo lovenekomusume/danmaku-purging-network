@@ -5,6 +5,7 @@
 #include "src/ListEditForm.h"
 #include "src/DPList.h"
 #include "src/Delegate.h"
+#include "src/REList.h"
 
 namespace Ui {
 class MainWindow;
@@ -37,9 +38,10 @@ private:
     QList<DPList> lists;
     QStandardItemModel *listsModel;
     static void switchListStatus(ButtonDelegate *delegate, QAbstractItemModel *model, const QModelIndex &index);
-    QString generateRegex(DPList list);
+    REList generateREList(DPList list);
     static void editList(ButtonDelegate *delegate, QAbstractItemModel *model, const QModelIndex &index);
     void openDir(QString path);
+    bool exportXML(QString itemPrefix, QString filename);
 };
 
 #endif // MAINWINDOW_H
