@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     s_this = this;
     ui->setupUi(this);
-    this->setWindowTitle("弹幕净化网络终端 v1.0.0-beta(测试版)");
+    this->setWindowTitle("弹幕净化网络小工具 v1.0.0");
     listsModel = new QStandardItemModel();
     ui->listsTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->listsTable->setModel(listsModel);
@@ -251,7 +251,7 @@ void MainWindow::on_clearSelectedListsButton_clicked()
 
 void MainWindow::on_action_about_this_tool_triggered()
 {
-    QString aboutStr = "<p>弹幕净化网络计划-终端工具 v1.0.0-beta(测试版)</p>";
+    QString aboutStr = "<p>弹幕净化网络小工具 v1.0.0</p>";
     aboutStr += "<p>弹幕净化网络这个名字启发自御坂网络，该项目旨在让需要的人能够更好地体验B站弹幕带来的乐趣，帮助大家屏蔽一些可能会引起不适的字词，或让各位分享自己的屏蔽经验。</p>";
     aboutStr += "<p>本工具使用 QT 5.7.1 制作。</p><p>作者: 月之庭</p><p>联系作者: lovenekomusume@163.com</p><p>本工具为免费开源软件，请勿用于任何商业用途，谢谢！</p>";
     aboutStr += "<p>License(开源协议): GPLv3</p>";
